@@ -32,3 +32,24 @@ Scenario: can't find similar movies if we don't know director (sad path)
   When  I follow "Find Movies With Same Director"
   Then  I should be on the home page
   And   I should see "'Alien' has no director info"
+
+Scenario: delete movie
+  Given I am on the details page for "Alien"
+  And   I follow "Delete"
+  Then  I should be on the RottenPotatoes home page 
+  And   I should see "Movie 'Alien' deleted."
+  
+Scenario: create movie
+  Given I am on the RottenPotatoes home page
+  And  I follow "Add new movie"
+  Then I should be on the new movie page
+  When I fill in "Title" with "The Infiltrator"
+  And I select "R" from "Rating"
+  And I select "2017" from "movie_release_date_1i"
+  And I select "November" from "movie_release_date_2i"
+  And I select "27" from "movie_release_date_3i"
+  And  I fill in "Director" with "Ridley Scott"
+  And I press "Save Changes"
+  Then I should be on the RottenPotatoes home page
+  And I should see "The Infiltrator was successfully created."
+  And the director of "The Infiltrator" should be "Ridley Scott"

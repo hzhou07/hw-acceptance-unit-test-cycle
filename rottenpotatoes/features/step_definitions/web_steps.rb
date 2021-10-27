@@ -53,6 +53,19 @@ When /^(?:|I )press "([^"]*)"$/ do |button|
   click_button(button)
 end
 
+Then /^the director of "([^"]*)" should be "([^"]*)"$/ do |movie,value|
+  step %{I should see "#{value}"}
+end
+
+Then /^the title should be "([^"]*)"$/ do |value|
+  step %{I should see "#{value}"}
+  #if page.respond_to? :should
+  #  page.should have_content(value)
+  #else
+  #  assert page.has_content?(value)
+  #end  
+end
+
 When /^(?:|I )follow "([^"]*)"$/ do |link|
   click_link(link)
 end
